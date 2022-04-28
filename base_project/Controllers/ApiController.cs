@@ -118,7 +118,7 @@ namespace base_project.Controllers
             /*
              * should be url encoded
              * endpoint name and function name, does not have to match
-             * remember to sanitazie inputs. invalid characters, html tags...
+             * remember to sanitize inputs. invalid characters, html tags...
              * */
 
             try
@@ -150,7 +150,7 @@ namespace base_project.Controllers
             /*
              * should be url encoded
              * endpoint name and function name, does not have to match
-             * remember to sanitazie inputs. invalid characters, html tags...
+             * remember to sanitize inputs. invalid characters, html tags...
              * */
 
             try
@@ -183,7 +183,7 @@ namespace base_project.Controllers
             /*
              * should be url encoded
              * endpoint name and function name, does not have to match
-             * remember to sanitazie inputs. invalid characters, html tags...
+             * remember to sanitize inputs. invalid characters, html tags...
              * */
 
             try
