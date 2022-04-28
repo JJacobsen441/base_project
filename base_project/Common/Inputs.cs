@@ -7,7 +7,7 @@ namespace base_project.Common
 {
     public class ProPost
     {
-        public string name { get; set; }
+        public string n_name { get; set; }
     }
 
     public class ProPut

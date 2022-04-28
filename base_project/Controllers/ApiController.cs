@@ -123,10 +123,13 @@ namespace base_project.Controllers
 
             try
             {
-                string name = _p.name;
-
-                if (!name.HasValue())
+                if (_p.IsNull())
                     throw new Exception();
+
+                if (!_p.n_name.HasValue())
+                    throw new Exception();
+
+                string name = _p.n_name;
 
                 name = HttpUtility.UrlDecode(name);
 
@@ -155,11 +158,14 @@ namespace base_project.Controllers
 
             try
             {
+                if (_p.IsNull())
+                    throw new Exception();
+
+                if (!_p.n_name.HasValue())
+                    throw new Exception();
+
                 int id = _p.id;
                 string n_name = _p.n_name;
-
-                if (!n_name.HasValue())
-                    throw new Exception();
 
                 n_name = HttpUtility.UrlDecode(n_name);
 
@@ -188,20 +194,23 @@ namespace base_project.Controllers
 
             try
             {
+                if (_p.IsNull())
+                    throw new Exception();
+
+                if (_p.note.IsNull())
+                    throw new Exception();
+
+                if (!_p.e_name.HasValue())
+                    throw new Exception();
+
+                if (!_p.p_name.HasValue())
+                    throw new Exception();
+
                 string note = _p.note;
                 double hours = _p.hours;
                 int day = _p.day;
                 string e_name = _p.e_name;
                 string p_name = _p.p_name;
-
-                if (note.IsNull())
-                    throw new Exception();
-
-                if (!e_name.HasValue())
-                    throw new Exception();
-
-                if (!p_name.HasValue())
-                    throw new Exception();
 
                 note = HttpUtility.UrlDecode(note);
                 e_name = HttpUtility.UrlDecode(e_name);
