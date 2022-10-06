@@ -8,7 +8,6 @@ using Microsoft.AspNetCore.Mvc;
 using System;
 using System.Collections.Generic;
 using System.Web;
-using static base_project.Common.Enums;
 
 namespace base_project.Controllers
 {
@@ -17,7 +16,7 @@ namespace base_project.Controllers
     public class ApiController : ControllerBase
     {
         [HttpGet("employees")]
-        public ActionResult Employees()
+        public JsonResult Employees()
         {
             /*
              * endpoint name and function name, does not have to match
@@ -30,7 +29,7 @@ namespace base_project.Controllers
 
                 JsonHelper json = new JsonHelper();
                 Response.StatusCode = StatusCodes.Status200OK;
-                return new JsonResult(json.ListTidy(null, dtos, TYPE.LIST));
+                return new JsonResult(json.SetupEmployeeList(dtos));
             }
             catch (Exception e)
             {
@@ -41,7 +40,7 @@ namespace base_project.Controllers
         }
 
         [HttpGet("employee/{id}")]
-        public ActionResult Employee(int id)
+        public JsonResult Employee(int id)
         {
             /*
              * endpoint name and function name, does not have to match
@@ -54,7 +53,7 @@ namespace base_project.Controllers
 
                 JsonHelper json = new JsonHelper();
                 Response.StatusCode = StatusCodes.Status200OK;
-                return new JsonResult(json.Tidy(null, dto, TYPE.SINGLE));
+                return new JsonResult(json.SetupEmployee(dto));
             }
             catch (Exception e)
             {
@@ -65,7 +64,7 @@ namespace base_project.Controllers
         }
 
         [HttpGet("projects")]
-        public ActionResult Projects()
+        public JsonResult Projects()
         {
             /*
              * endpoint name and function name, does not have to match
@@ -78,7 +77,7 @@ namespace base_project.Controllers
 
                 JsonHelper json = new JsonHelper();
                 Response.StatusCode = StatusCodes.Status200OK;
-                return new JsonResult(json.ListTidy(dtos, null, TYPE.LIST));
+                return new JsonResult(json.SetupProjectList(dtos));
             }
             catch (Exception e)
             {
@@ -89,7 +88,7 @@ namespace base_project.Controllers
         }
 
         [HttpGet("project/{id}")]
-        public ActionResult Project(int id)
+        public JsonResult Project(int id)
         {
             /*
              * endpoint name and function name, does not have to match
@@ -102,7 +101,7 @@ namespace base_project.Controllers
 
                 JsonHelper json = new JsonHelper();
                 Response.StatusCode = StatusCodes.Status200OK;
-                return new JsonResult(json.Tidy(dto, null, TYPE.SINGLE));
+                return new JsonResult(json.SetupProject(dto));
             }
             catch (Exception e)
             {
@@ -113,7 +112,7 @@ namespace base_project.Controllers
         }
 
         [HttpPost("project")]
-        public ActionResult Project(ProPost _p)
+        public JsonResult Project(ProPost _p)
         {
             /*
              * should be url encoded
@@ -148,7 +147,7 @@ namespace base_project.Controllers
         }
 
         [HttpPut("project")]
-        public ActionResult Project(ProPut _p)
+        public JsonResult Project(ProPut _p)
         {
             /*
              * should be url encoded
@@ -184,7 +183,7 @@ namespace base_project.Controllers
         }
 
         [HttpPost("effort")]
-        public ActionResult Effort(EffPost _p)
+        public JsonResult Effort(EffPost _p)
         {
             /*
              * should be url encoded
