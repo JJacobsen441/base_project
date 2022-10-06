@@ -53,7 +53,7 @@ namespace base_project.Controllers
 
                 JsonHelper json = new JsonHelper();
                 Response.StatusCode = StatusCodes.Status200OK;
-                return new JsonResult(json.SetupEmployee(dto));
+                return new JsonResult(json.SetupEmployee(dto, true));
             }
             catch (Exception e)
             {
@@ -101,7 +101,7 @@ namespace base_project.Controllers
 
                 JsonHelper json = new JsonHelper();
                 Response.StatusCode = StatusCodes.Status200OK;
-                return new JsonResult(json.SetupProject(dto));
+                return new JsonResult(json.SetupProject(dto, true));
             }
             catch (Exception e)
             {

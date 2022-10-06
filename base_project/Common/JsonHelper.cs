@@ -52,13 +52,7 @@ namespace base_project.Common
 
             foreach (ProjectDTO p in _p)
             {
-                ResultProject1 res = new ResultProject1()
-                {
-                    id = p.Id,
-                    name = !p.name.IsNull() ? p.name : "",
-                    effort = null
-
-                };
+                ResultProject1 res = SetupProject(p, false);
                 list.Add(res);
             }
 
@@ -74,46 +68,39 @@ namespace base_project.Common
 
             foreach (EmployeeDTO e in _e)
             {
-                ResultEmployee1 res = new ResultEmployee1()
-                {
-                    id = e.Id,
-                    first_name = !e.first_name.IsNull() ? e.first_name : "",
-                    last_name = !e.last_name.IsNull() ? e.last_name : "",
-                    effort = null
-
-                };
+                ResultEmployee1 res = SetupEmployee(e, false);
                 list.Add(res);
             }
 
             return list;
         }
 
-        public ResultProject1 SetupProject(ProjectDTO _p)
+        public ResultProject1 SetupProject(ProjectDTO _p, bool with_effort)
         {
             if (_p.IsNull())
                 throw new Exception();
 
             ResultProject1 res = new ResultProject1()
             {
-                //id = _p.Id,
+                id = _p.Id,
                 name = !_p.name.IsNull() ? _p.name : "",
-                effort = SetupEffortList(_p.effort.ToList(), true)
+                effort = with_effort ? SetupEffortList(_p.effort.ToList(), true) : null
             };
 
             return res;
         }
 
-        public ResultEmployee1 SetupEmployee(EmployeeDTO _e)
+        public ResultEmployee1 SetupEmployee(EmployeeDTO _e, bool with_effort)
         {
             if (_e.IsNull())
                 throw new Exception();
 
             ResultEmployee1 res = new ResultEmployee1()
             {
-                //id = _e.Id,
+                id = _e.Id,
                 first_name = !_e.first_name.IsNull() ? _e.first_name : "",
                 last_name = !_e.last_name.IsNull() ? _e.last_name : "",
-                effort = SetupEffortList(_e.effort.ToList(), false)
+                effort = with_effort ? SetupEffortList(_e.effort.ToList(), false) : null
             };
 
             return res;
