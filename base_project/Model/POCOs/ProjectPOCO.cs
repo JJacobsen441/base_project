@@ -59,8 +59,6 @@ namespace Base.Model
             if (name.IsNull())
                 throw new Exception();
 
-            Validator.CheckProjectName(name);
-
             using (BaseDB _db = new BaseDB())
             {
                 Project _p = new Project();
@@ -76,8 +74,6 @@ namespace Base.Model
         {
             if (n_name.IsNull())
                 throw new Exception();
-
-            Validator.CheckProjectName(n_name);
 
             using (BaseDB _db = new BaseDB())
             {

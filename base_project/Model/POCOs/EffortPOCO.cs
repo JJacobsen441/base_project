@@ -28,8 +28,11 @@ namespace Base.Model
             if (note.IsNull())
                 throw new Exception();
 
-            Validator.CheckProjectName(p_name);
-            Validator.CheckEmployeeName(e_name);
+            if (e_name.IsNull())
+                throw new Exception();
+
+            if (p_name.IsNull())
+                throw new Exception();
 
             using (BaseDB _db = new BaseDB())
             {

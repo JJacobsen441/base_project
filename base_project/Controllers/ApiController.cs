@@ -7,7 +7,6 @@ using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using System;
 using System.Collections.Generic;
-using System.Web;
 
 namespace base_project.Controllers
 {
@@ -118,6 +117,8 @@ namespace base_project.Controllers
              * should be url encoded
              * endpoint name and function name, does not have to match
              * remember to sanitize inputs. invalid characters, html tags...
+             * this isnt fully sanitized, we should also check for XSS
+             * EF handles sql injections
              * */
 
             try
@@ -125,15 +126,10 @@ namespace base_project.Controllers
                 if (_p.IsNull())
                     throw new Exception();
 
-                if (!_p.n_name.HasValue())
-                    throw new Exception();
-
-                string name = _p.n_name;
-
-                name = HttpUtility.UrlDecode(name);
+                Validator.CheckProject(_p);
 
                 DAL dal = new DAL();
-                dal.CreateProject(name);
+                dal.CreateProject(_p.n_name);
 
                 Response.StatusCode = StatusCodes.Status200OK;
                 return new JsonResult(new { result = "ok" });
@@ -153,6 +149,8 @@ namespace base_project.Controllers
              * should be url encoded
              * endpoint name and function name, does not have to match
              * remember to sanitize inputs. invalid characters, html tags...
+             * this isnt fully sanitized, we should also check for XSS
+             * EF handles sql injections
              * */
 
             try
@@ -160,16 +158,10 @@ namespace base_project.Controllers
                 if (_p.IsNull())
                     throw new Exception();
 
-                if (!_p.n_name.HasValue())
-                    throw new Exception();
-
-                int id = _p.id;
-                string n_name = _p.n_name;
-
-                n_name = HttpUtility.UrlDecode(n_name);
+                Validator.CheckProject(_p);
 
                 DAL dal = new DAL();
-                dal.UpdateProject(id, n_name);
+                dal.UpdateProject(_p.id, _p.n_name);
 
                 Response.StatusCode = StatusCodes.Status200OK;
                 return new JsonResult(new { result = "ok" });
@@ -189,6 +181,8 @@ namespace base_project.Controllers
              * should be url encoded
              * endpoint name and function name, does not have to match
              * remember to sanitize inputs. invalid characters, html tags...
+             * this isnt fully sanitized, we should also check for XSS
+             * EF handles sql injections
              * */
 
             try
@@ -196,27 +190,10 @@ namespace base_project.Controllers
                 if (_p.IsNull())
                     throw new Exception();
 
-                if (_p.note.IsNull())
-                    throw new Exception();
-
-                if (!_p.e_name.HasValue())
-                    throw new Exception();
-
-                if (!_p.p_name.HasValue())
-                    throw new Exception();
-
-                string note = _p.note;
-                double hours = _p.hours;
-                int day = _p.day;
-                string e_name = _p.e_name;
-                string p_name = _p.p_name;
-
-                note = HttpUtility.UrlDecode(note);
-                e_name = HttpUtility.UrlDecode(e_name);
-                p_name = HttpUtility.UrlDecode(p_name);
-
+                Validator.CheckEffort(_p);
+                
                 DAL dal = new DAL();
-                dal.CreateEffort(note, hours, day, e_name, p_name);
+                dal.CreateEffort(_p.note, _p.hours, _p.day, _p.e_name, _p.p_name);
 
                 Response.StatusCode = StatusCodes.Status200OK;
                 return new JsonResult(new { result = "ok" });
