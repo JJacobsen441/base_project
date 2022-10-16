@@ -43,36 +43,38 @@ namespace base_project.Common
             public string pro_name { get; set; }
         }
 
-        public List<ResultProject1> SetupProjectList(List<ProjectDTO> _p)
+        public ResultProjectList1 SetupProjectList(List<ProjectDTO> _p)
         {
             if (_p.IsNull())
                 throw new Exception();
 
-            List<ResultProject1> list = new List<ResultProject1>();
+            ResultProjectList1 res = new ResultProjectList1();
+            res.list = new List<ResultProject1>();
 
             foreach (ProjectDTO p in _p)
             {
-                ResultProject1 res = SetupProject(p, false);
-                list.Add(res);
+                ResultProject1 _r = SetupProject(p, false);
+                res.list.Add(_r);
             }
 
-            return list;
+            return res;
         }
 
-        public List<ResultEmployee1> SetupEmployeeList(List<EmployeeDTO> _e)
+        public ResultEmployeeList1 SetupEmployeeList(List<EmployeeDTO> _e)
         {
             if (_e.IsNull())
                 throw new Exception();
 
-            List<ResultEmployee1> list = new List<ResultEmployee1>();
+            ResultEmployeeList1 res = new ResultEmployeeList1();
+            res.list = new List<ResultEmployee1>();
 
             foreach (EmployeeDTO e in _e)
             {
-                ResultEmployee1 res = SetupEmployee(e, false);
-                list.Add(res);
+                ResultEmployee1 _r = SetupEmployee(e, false);
+                res.list.Add(_r);
             }
 
-            return list;
+            return res;
         }
 
         public ResultProject1 SetupProject(ProjectDTO _p, bool with_effort)
